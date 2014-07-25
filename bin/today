@@ -3,36 +3,15 @@ $:.unshift(File.expand_path('../lib', File.dirname(__FILE__)))
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require
-require 'open-uri'
-
-
-
-today = Date.today
-tomorrow = today + 1
-start_min = "start-min=#{today}"
-start_max = "start-max=#{tomorrow}"
-
-args = [start_min, start_max].join('&')
-url = ARGV[0] + "?" + args
-puts url
-page = Nokogiri.parse open(url)
-
-def events(page)
-  events = []
-  page.search('entry').each do |entry|
-    events << entry.css('title').text
-  end
-  events
-end
-
-puts today
-events(page).each do |event|
-  puts "* " + event
-end
-
 require 'today'
 
+def the_date
+  Date.today.strftime('%A, %B %e')
+end
+
 calendar = Today::Calendar.new(ARGV[0])
-puts calendar.name
-puts calendar.events.map {|event| "* #{event}" }.join("\n")
+message = "#{the_date}\n\n#{calendar.name}:\n\n" +
+          calendar.events.map {|event| "* #{event}" }.join("\n")
+
+puts message
 
