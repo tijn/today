@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
-
+$:.unshift(File.expand_path('../lib', File.dirname(__FILE__)))
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require
 require 'open-uri'
+
+
 
 today = Date.today
 tomorrow = today + 1
@@ -27,3 +29,10 @@ puts today
 events(page).each do |event|
   puts "* " + event
 end
+
+require 'today'
+
+calendar = Today::Calendar.new(ARGV[0])
+puts calendar.name
+puts calendar.events.map {|event| "* #{event}" }.join("\n")
+
