@@ -3,7 +3,6 @@ require 'open-uri'
 
 module Today
 
-  # wrapper around the xml google calendar returns
   class Calendar
     attr_reader :doc
 
@@ -16,11 +15,9 @@ module Today
     end
 
     def events
-      events = []
-      @doc.search('entry').each do |entry|
-        events << entry.css('title').text
+      @doc.search('entry').map do |entry|
+        entry.css('title').text
       end
-      events
     end
   end
 

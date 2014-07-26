@@ -5,4 +5,3 @@ require 'bundler/setup'
 Bundler.require
 require 'irb'
 IRB.start
-
