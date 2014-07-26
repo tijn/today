@@ -8,7 +8,9 @@ Shout out on Hipchat what's on a google calendar for today
 
 ## Huh? Why?
 
-At our office every day is different; you never know who you should expect to see there: some collegues will visit clients, some are doing part time academic work, some have a day off or work from home... you get the gist. This little project grew out of the need to be informed about how many people one can expect to see at the office today. Obviously we jot this all down in a calendar but I'm too lazy for looking it up every day. I simply want an app to shout it at me on HipChat while I have breakfast.
+At our office, every day is different. You never know who you can expect to see there. Some collegues will visit clients, others are doing part time academic work, someone could have a day off or maybe working from home... you get the gist. This little project grew out of the need to be informed about how many people one can expect to see at the office.
+
+Obviously we jot this all this information down in a calendar but I'm too lazy for looking that thing up every day. I simply want an app to shout it at me on HipChat while I have breakfast.
 
 
 ## How can I have this too?
