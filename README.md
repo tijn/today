@@ -32,7 +32,9 @@ You may specify as many configs as you want.
 
 Then you feed this config to the script to see if it works:
 
-`$ bin/today_on_hipchat < my_superawesome_configuration.yml`
+```sh
+bin/today_on_hipchat < my_superawesome_configuration.yml
+```
 
 And you set up the obvious cron job for it.
 
