@@ -16,7 +16,7 @@ end
 config = YAML.load($stdin)
 config.each do |key, settings|
   puts settings.inspect
-  calendar = Today::Calendar.new(settings['calendar_url'])
+  calendar = Today.fetch_calendar(settings['calendar_url'])
   hipchat = hipchat_room(settings)
 
   message = "#{the_date}\n\n#{calendar.name}:\n\n" +

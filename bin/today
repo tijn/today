@@ -9,9 +9,8 @@ def the_date
   Date.today.strftime('%A, %B %e')
 end
 
-calendar = Today::Calendar.new(ARGV[0])
+calendar = Today.fetch_calendar(ARGV[0])
 message = "#{the_date}\n\n#{calendar.name}:\n\n" +
-          calendar.events.map {|event| "* #{event}" }.join("\n")
+          calendar.events.map { |event| "* #{event}" }.join("\n")
 
 puts message
-
