@@ -39,4 +39,4 @@ And you set up the obvious cron job for it.
 
 **It doesn't deal with time zones at all.**
 
-This is not a problem for me since our company is not geographically dispersed and I just let the cron job run at 7am or so. It'll be fine in winter and summer time. But if you want to improve it: please send a pull request!
+This is not a problem for me since our company is not geographically dispersed. Besides I just let the cron job run at 7 AM or so. It'll be fine in winter and summer time. But if you want to improve it: please send a pull request!
