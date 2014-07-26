@@ -5,10 +5,7 @@ require 'bundler/setup'
 Bundler.require
 require 'today'
 
-def the_date
-  Date.today.strftime('%A, %B %e')
-end
-
+the_date = Date.today.strftime('%A, %B %e')
 calendar = Today.fetch_calendar(ARGV[0])
 message = "#{the_date}\n\n#{calendar.name}:\n\n" +
           calendar.events.map { |event| "* #{event}" }.join("\n")

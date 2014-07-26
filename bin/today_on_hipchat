@@ -13,16 +13,11 @@ def hipchat_room(settings)
 end
 
 # Eat a config file (a yml) and for each entry do ...
-config = YAML.load($stdin)
-config.each do |key, settings|
-  puts settings.inspect
+YAML.load($stdin).each do |key, settings|
   calendar = Today.fetch_calendar(settings['calendar_url'])
-  hipchat = hipchat_room(settings)
-
   message = "#{the_date}\n\n#{calendar.name}:\n\n" +
             calendar.events.map { |event| "* #{event}" }.join("\n")
 
-  puts message
-
-  # hipchat.send('Today', message, message_format: 'text')
+  hipchat = hipchat_room(settings)
+  hipchat.send('Today', message, message_format: 'text')
 end
