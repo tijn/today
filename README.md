@@ -4,6 +4,7 @@
 ## What?
 
 Shout out on Hipchat what's on a google calendar for today
+![Today Hubot Extension Screenshot](screenshot.png)
 
 
 ## Huh? Why?
