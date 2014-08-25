@@ -13,6 +13,7 @@ end
 # Eat a config file (a yml) and for each entry do ...
 YAML.load($stdin).each do |key, settings|
   calendar = Today.fetch_calendar(settings['calendar_url'])
+  next if calendar.events.empty?
   message = "#{calendar.name}:\n" +
             calendar.events.map { |event| "* #{event}" }.join("\n")
 
