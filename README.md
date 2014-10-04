@@ -39,6 +39,19 @@ bin/today_on_hipchat < my_superawesome_configuration.yml
 
 And you set up the obvious cron job for it.
 
+## Example Cron-job
+
+A typical use would be to call Today in a daily cron-job.
+You can use the script below as a starting point.
+(mainly useful to see how to use rbenv with this)
+
+```sh
+#!/bin/sh
+
+export PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+bin/today_on_hipchat < config.yml
+```
 
 ## Known issues
 
