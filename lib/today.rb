@@ -1,18 +1,45 @@
 require 'today/calendar'
+require 'today/event_printer'
 
-module Today
-  VERSION = "1.0.1"
+class Today
+  extend Memoist
+  VERSION = "1.1.0"
+  attr_accessor :date
 
-  def self.fetch_calendar(url)
-    Calendar.new(open(calendar_url_for_today(url)))
+  def initialize(options = {})
+    @date = options[:date] || Date.today
+    @google_calendar_url = options[:google_calendar_url]
   end
 
-  def self.calendar_url_for_today(url, today = Date.today)
-    uri = URI.parse(url)
-    tomorrow = today + 1
-    start_min = "start-min=#{today}"
+  memoize def calendar
+    fetch_calendar
+  end
+
+  def fetch_calendar
+    Calendar.new open(calendar_url)
+  end
+
+  def calendar_url
+    uri = URI.parse(@google_calendar_url)
+    tomorrow = date.next
+    start_min = "start-min=#{date}"
     start_max = "start-max=#{tomorrow}"
     uri.query = [uri.query, start_min, start_max].compact.join('&')
     uri.to_s
   end
+
+  memoize def event_printer
+    EventPrinter.new(@date)
+  end
+
+  def empty?
+    calendar.empty?
+  end
+
+  def to_s
+    the_date = @date.strftime('%A, %B %e').gsub("  ", " ")
+    "#{the_date}\n\n#{calendar.name}:\n\n" +
+      calendar.events.map { |event| "* #{event_printer.print(event)}" }.join("\n")
+  end
+
 end

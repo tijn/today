@@ -12,11 +12,8 @@ end
 
 # Eat a config file (a yml) and for each entry do ...
 YAML.load($stdin).each do |key, settings|
-  calendar = Today.fetch_calendar(settings['calendar_url'])
-  next if calendar.events.empty?
-  message = "#{calendar.name}:\n" +
-            calendar.events.map { |event| "* #{event}" }.join("\n")
-
+  today = Today.new(date: Date.today, google_calendar_url: settings['calendar_url'])
+  next if today.empty?
   hipchat = hipchat_room(settings)
-  hipchat.send('Today', message, message_format: 'text')
+  hipchat.send('Today', today.to_s, message_format: 'text')
 end

@@ -1,23 +1,29 @@
 require 'nokogiri'
 require 'open-uri'
+require 'today/event'
 
-module Today
+class Today
 
   class Calendar
+    extend Memoist
     attr_reader :doc
 
     def initialize(xml)
       @doc = Nokogiri.parse(xml)
     end
 
-    def name
+    memoize def name
       @doc.css('feed > title').text
     end
 
-    def events
+    memoize def events
       @doc.search('entry').map do |entry|
-        entry.css('title').text
+        Event.parse_element(entry)
       end
+    end
+
+    def empty?
+      events.empty?
     end
   end
 
