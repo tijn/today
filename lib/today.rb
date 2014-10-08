@@ -38,7 +38,7 @@ class Today
 
   def to_s
     the_date = @date.strftime('%A, %B %e').gsub("  ", " ")
-    "#{the_date}\n\n#{calendar.name}:\n\n" +
+    "#{calendar.name}:\n" +
       calendar.events.map { |event| "* #{event_printer.print(event)}" }.join("\n")
   end
 
