@@ -36,10 +36,12 @@ class Today
     calendar.empty?
   end
 
+  def the_date
+    @date.strftime('%A, %B %e').gsub("  ", " ")
+  end
+
   def to_s
-    the_date = @date.strftime('%A, %B %e').gsub("  ", " ")
-    "#{calendar.name}:\n" +
-      calendar.events.map { |event| "* #{event_printer.print(event)}" }.join("\n")
+    "#{calendar.name}:\n" + calendar.events.map { |event| "* #{event_printer.print(event)}" }.join("\n")
   end
 
 end
