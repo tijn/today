@@ -50,11 +50,8 @@ You can use the script below as a starting point.
 
 export PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-bin/today_on_hipchat < config.yml
+TZ=Europe/Amsterdam bin/today_on_hipchat < config.yml
 ```
 
-## Known issues
+Use the TZ environment variable to set the time zone for displaying times.
 
-**It doesn't deal with time zones at all.**
-
-This is not a problem for me since our company is not geographically dispersed. Besides I just let the cron job run at 7 AM or so. It'll be fine in winter and summer time. But if you want to improve it: please send a pull request!
