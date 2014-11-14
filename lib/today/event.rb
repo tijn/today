@@ -5,7 +5,8 @@ class Today
 
     def self.parse_element(entry)
       if gd_when = entry.at('when')
-        from, to = Time.parse(gd_when.attr('starttime')), Time.parse(gd_when.attr('endtime'))
+        from = maybe_time gd_when.attr('starttime')
+        to = maybe_time gd_when.attr('endtime')
       end
       new(entry.css('title').text, from, to)
     end
@@ -20,6 +21,13 @@ class Today
       return true if from.nil? || to.nil?
       from <= today.to_time &&
         to >= today.next.to_time
+    end
+  
+    private
+
+    def maybe_time(string)
+      return nil if string.nil?
+      Time.parse(string)
     end
 
   end
