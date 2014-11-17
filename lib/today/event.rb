@@ -25,7 +25,7 @@ class Today
   
     private
 
-    def maybe_time(string)
+    def self.maybe_time(string)
       return nil if string.nil?
       Time.parse(string)
     end
