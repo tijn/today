@@ -31,6 +31,8 @@ another_calendar:
 
 You may specify as many configs as you want.
 
+Google might give you a URL which ends in `/basic`. This version of your calendar contains no start or end times. Change `/basic` into `/full` for a version that does. (Google why didn't you tell me? It took me ages to figure this out!)
+
 Then you feed this config to the script to see if it works:
 
 ```sh
