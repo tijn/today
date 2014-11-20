@@ -3,12 +3,10 @@ require 'time'
 class Today
   Event = Struct.new(:title, :from, :to) do
 
-    def self.parse_element(entry)
-      if gd_when = entry.at('when')
-        from = maybe_time gd_when.attr('starttime')
-        to = maybe_time gd_when.attr('endtime')
-      end
-      new(entry.css('title').text, from, to)
+    def self.summarize_ical_event(entry)
+      from = entry.dtstart
+      to = entry.dtend
+      new(entry.summary, from, to)
     end
 
     def to_s
@@ -22,7 +20,27 @@ class Today
       from <= today.to_time &&
         to >= today.next.to_time
     end
-  
+
+    def after_today?(today = Date.today)
+      from.to_date > today
+    end
+
+    def before_today?(today = Date.today)
+      if to.nil?
+        from.to_date < today
+      else
+        to.to_date < today
+      end
+    end
+
+    def occurring_today?(today = Date.today)
+      !after_today?(today) && !before_today?(today)
+    end
+
+    def <=>(other)
+      from.to_time <=> other.from.to_time
+    end
+
     private
 
     def self.maybe_time(string)

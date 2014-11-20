@@ -4,5 +4,5 @@ ruby '2.1.2'
 
 gem 'activesupport'
 gem 'hipchat'
+gem 'icalendar'
 gem 'memoist'
-gem 'nokogiri'

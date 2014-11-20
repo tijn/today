@@ -16,7 +16,7 @@ class Today
   end
 
   def fetch_calendar
-    Calendar.new open(calendar_url)
+    Calendar.new open(calendar_url), @date
   end
 
   def calendar_url

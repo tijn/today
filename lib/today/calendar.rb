@@ -1,4 +1,4 @@
-require 'nokogiri'
+require 'icalendar'
 require 'open-uri'
 require 'today/event'
 
@@ -8,18 +8,22 @@ class Today
     extend Memoist
     attr_reader :doc
 
-    def initialize(xml)
-      @doc = Nokogiri.parse(xml)
+    def initialize(ics, date = Date.today)
+      @doc = Icalendar.parse(ics).first
+      @date = date
     end
 
     memoize def name
-      @doc.css('feed > title').text
+      "name"
+      # @doc.css('feed > title').text
     end
 
     memoize def events
-      @doc.search('entry').map do |entry|
-        Event.parse_element(entry)
-      end
+      @doc.events.map do |entry|
+        Event.summarize_ical_event(entry)
+      end.select do |event|
+        event.occurring_today?(@date)
+      end.sort
     end
 
     def empty?
